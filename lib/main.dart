@@ -1,82 +1,49 @@
 import 'package:flutter/material.dart';
+//import 'package:flutter/services.dart';
+import 'package:helloworldflutter/menu_items.dart';
+import 'package:helloworldflutter/screens/HomePage.dart';
 
+// Future main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await SystemChrome.setPreferredOrientations([
+//     DeviceOrientation.portraitUp,
+//     DeviceOrientation.portraitDown,
+//   ]);
+
+//   runApp(const MyApp());
+// }
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  static const String title = 'Novel';
   const MyApp({super.key});
-
-  static const String _title = 'Flutter Code Sample';
-
   @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: _title,
-      home: MyStatelessWidget(),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: title,
+      theme: ThemeData(
+        primaryColor: Colors.purple,
+      ),
+      home: const MainPage(title: title),
+      routes: {"/": (context) => HomePage()});
 }
 
-class AppBarContent extends StatelessWidget {
-  const AppBarContent({super.key});
+class MainPage extends StatefulWidget {
+  final String title;
+
+  const MainPage({
+    super.key,
+    required this.title,
+  });
 
   @override
-  Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
-          child: Row(
-            children: <Widget>[
-              const Text(
-                'PreferredSize Sample',
-                style: TextStyle(color: Colors.white),
-              ),
-              const Spacer(),
-              IconButton(
-                icon: const Icon(
-                  Icons.search,
-                  size: 20,
-                ),
-                color: Colors.white,
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(
-                  Icons.more_vert,
-                  size: 20,
-                ),
-                color: Colors.white,
-                onPressed: () {},
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
+  // ignore: library_private_types_in_public_api
+  _MainPageState createState() => _MainPageState();
 }
 
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({super.key});
-
+class _MainPageState extends State<MainPage> {
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80.0),
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: <Color>[Colors.blue, Colors.pink],
-            ),
-          ),
-          child: const AppBarContent(),
-        ),
-      ),
-      body: const Center(
-        child: Text('Content'),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => const Scaffold(
+        body: MenuItem(),
+      );
 }
